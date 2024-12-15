@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Enrollment - Marketing Agency</title>
+    <link rel="stylesheet" href="/students/student.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://storage.googleapis.com/a1aa/image/B3eL7LbKqNwFJqlCGY5lBUpM3SgPK4HHwIHT1QoUoCr3Eh9JA.jpg') center/cover;
+            height: 70vh;
+        }
+    </style>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Marketing Agency</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a class="hover:underline" href="#">Home</a></li>
+                    <li><a class="hover:underline" href="#">Services</a></li>
+                    <li><a class="hover:underline" href="#">Clients</a></li>
+                    <li><a class="hover:underline" href="#">Students</a></li>
+                    <li><a class="hover:underline" href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+ <!-- Hero Section -->
+ <section class="hero">
+    <div class="hero-content text-white text-center">
+        <h2 class="text-4xl font-bold mb-4">Earn Passive Income with Us</h2>
+        <p class="text-lg mb-4">Work just 2-3 hours from your mobile and start earning money!</p>
+        <a href="#registration-form" class="cta-button">Register Now</a>
+    </div>
+</section>
+
+
+
+
+    <!-- Registration Form -->
+    <main class="container mx-auto p-4">
+        <section class="mb-8">
+            <div class="bg-white p-6 rounded shadow-md">
+                <h3 class="text-2xl font-bold mb-4">Student Registration Form</h3>
+                <form id="registration-form">
+                    <div class="mb-4">
+                        <label for="name" class="block text-gray-700 mb-2">Full Name</label>
+                        <input id="name" name="name" type="text" class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-600" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-gray-700 mb-2">Email</label>
+                        <input id="email" name="email" type="email" class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-600" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="phone" class="block text-gray-700 mb-2">Phone Number</label>
+                        <input id="phone" name="phone" type="tel" class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-600" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="address" class="block text-gray-700 mb-2">Address</label>
+                        <input id="address" name="address" type="text" class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-600" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="payment" class="block text-gray-700 mb-2">Payment Amount</label>
+                        <input id="payment" name="payment" type="text" value="Rs 249" readonly class="w-full p-2 border rounded">
+                    </div>
+                    <button id="rzp-button" type="button" class="bg-blue-600 text-white p-3 rounded w-full hover:bg-blue-700">Register and Pay</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2023 Marketing Agency. All rights reserved.</p>
+            <div class="flex justify-center space-x-4 mt-2">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Razorpay Payment Integration -->
+    <script>
+        document.getElementById('rzp-button').onclick = function(e) {
+            var options = {
+                "key": "rzp_test_clFGpdM8o2QECc", // Replace with your Razorpay key
+                "amount": 24900, // Amount in paise (Rs 249)
+                "currency": "INR",
+                "name": "Marketing Agency",
+                "description": "Student Enrollment Fee",
+                "handler": function (response) {
+                    alert('Payment Successful! Payment ID: ' + response.razorpay_payment_id);
+                },
+                "prefill": {
+                    "name": document.getElementById('name').value,
+                    "email": document.getElementById('email').value,
+                    "contact": document.getElementById('phone').value
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp = new Razorpay(options);
+            rzp.open();
+            e.preventDefault();
+        };
+    </script>
+</body>
+</html>
